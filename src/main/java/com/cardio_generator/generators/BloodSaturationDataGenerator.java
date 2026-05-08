@@ -4,10 +4,19 @@ import java.util.Random;
 
 import com.cardio_generator.outputs.OutputStrategy;
 
+/**
+ * Fakes blood oxygen saturation (SpO2) readings.
+ * Values walk up and down by 1 each tick and stay in the 90-100 range.
+ */
 public class BloodSaturationDataGenerator implements PatientDataGenerator {
     private static final Random random = new Random();
     private int[] lastSaturationValues;
 
+    /**
+     * Sets a starting saturation between 95 and 100 for each patient.
+     *
+     * @param patientCount number of patients to simulate
+     */
     public BloodSaturationDataGenerator(int patientCount) {
         lastSaturationValues = new int[patientCount + 1];
 
@@ -17,6 +26,13 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
         }
     }
 
+    /**
+     * Picks the next saturation value (previous + small random change),
+     * clamps it to 90-100 and writes it out under the "Saturation" label.
+     *
+     * @param patientId patient to generate for
+     * @param outputStrategy where to write the result
+     */
     @Override
     public void generate(int patientId, OutputStrategy outputStrategy) {
         try {

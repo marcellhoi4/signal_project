@@ -1,6 +1,6 @@
 package com.alerts;
 
-// Represents an alertt
+// Represents an alert
 public class Alert {
     private String patientId;
     private String condition;
