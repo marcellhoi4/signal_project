@@ -54,6 +54,7 @@ Thumbs.db
 *.tar.gz
 *.rar
 hs_err_pid*
+!bin/*.jar
 
 ### Local development ###
 /local/
