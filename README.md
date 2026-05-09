@@ -64,7 +64,7 @@ java -jar target/cardio_generator-1.0-SNAPSHOT.jar --patient-count 100 --output 
 
 Class diagrams for the four CHMS subsystems (alert generation, data storage,
 patient identification, data access layer) live in [uml_models/](uml_models/).
-Each diagram is a PlantUML source file with a written rationale in
+Each diagram is png file with a written rationale in
 [uml_models/README.md](uml_models/README.md).
 
 ## License
