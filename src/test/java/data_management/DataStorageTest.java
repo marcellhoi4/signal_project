@@ -7,12 +7,18 @@ import com.data_management.DataStorage;
 import com.data_management.PatientRecord;
 
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 
 class DataStorageTest {
 
+    @BeforeEach
+    void reset() {
+        DataStorage.resetForTesting();
+    }
+
     @Test
     void testAddAndGetRecords() {
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
         storage.addPatientData(1, 100.0, "WhiteBloodCells", 1714376789050L);
         storage.addPatientData(1, 200.0, "WhiteBloodCells", 1714376789051L);
 

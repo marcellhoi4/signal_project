@@ -13,7 +13,7 @@ import com.data_management.Patient;
 class AlertGeneratorTest {
 
     private List<Alert> run(Patient p) {
-        AlertGenerator g = new AlertGenerator(new DataStorage());
+        AlertGenerator g = new AlertGenerator(DataStorage.getInstance());
         g.evaluateData(p);
         return g.getAlerts();
     }

@@ -28,15 +28,29 @@ import java.util.ArrayList;
 /**
  * Main class of the simulator. Reads CLI args, picks the output strategy,
  * and starts a scheduled task per patient per data type.
- *
  * Run with -h to see all options.
  */
 public class HealthDataSimulator {
+
+    private static HealthDataSimulator instance;
 
     private static int patientCount = 50; // Default number of patients
     private static ScheduledExecutorService scheduler;
     private static OutputStrategy outputStrategy = new ConsoleOutputStrategy(); // Default output strategy
     private static final Random random = new Random();
+
+    private HealthDataSimulator() {}
+
+    /**
+     * Returns the singleton instance of the simulator, creating it on first call.
+     *
+     * @return the shared HealthDataSimulator instance
+     */
+    @SuppressWarnings("InstantiationOfUtilityClass")
+    public static synchronized HealthDataSimulator getInstance() {
+        if (instance == null) instance = new HealthDataSimulator();
+        return instance;
+    }
 
     /**
      * Program entry point.
@@ -45,6 +59,7 @@ public class HealthDataSimulator {
      * @throws IOException if the file output directory can't be created
      */
     public static void main(String[] args) throws IOException {
+        getInstance();
 
         parseArguments(args);
 
