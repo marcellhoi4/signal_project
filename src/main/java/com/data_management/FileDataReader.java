@@ -39,7 +39,7 @@ public class FileDataReader implements DataReader {
             long ts = Long.parseLong(extract(parts[1], "Timestamp:"));
             String label = extract(parts[2], "Label:");
             String raw = extract(parts[3], "Data:");
-            storage.addPatientData(id, parseValue(label, raw), label, ts);
+            storage.addPatientData(id, ValueParser.parse(label, raw), label, ts);
         } catch (IllegalArgumentException e) {
             // skip bad line
         }
@@ -49,14 +49,5 @@ public class FileDataReader implements DataReader {
         int idx = segment.indexOf(prefix);
         if (idx < 0) throw new IllegalArgumentException("missing prefix");
         return segment.substring(idx + prefix.length()).trim();
-    }
-
-    private double parseValue(String label, String raw) {
-        if (raw.endsWith("%")) raw = raw.substring(0, raw.length() - 1);
-        if ("Alert".equals(label)) {
-            if (raw.equalsIgnoreCase("triggered")) return 1.0;
-            if (raw.equalsIgnoreCase("resolved")) return 0.0;
-        }
-        return Double.parseDouble(raw);
     }
 }

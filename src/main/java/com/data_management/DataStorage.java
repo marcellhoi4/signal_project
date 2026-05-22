@@ -1,9 +1,9 @@
 package com.data_management;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import com.alerts.AlertGenerator;
 
 /**
@@ -22,7 +22,8 @@ public class DataStorage {
      * structure.
      */
     private DataStorage() {
-        this.patientMap = new HashMap<>();
+        // ConcurrentHashMap so multiple WebSocket / file threads can write safely.
+        this.patientMap = new ConcurrentHashMap<>();
     }
 
     /**
